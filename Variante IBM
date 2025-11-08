@@ -1,0 +1,56 @@
+@startuml
+title Diagrama E-R (Variante IBM) - Honeymoon Jabones Naturales
+
+entity "Cliente" as Cliente {
+  *idCliente : int
+  --
+  nombre : string
+  correo : string
+  telefono : string
+  direccion : string
+}
+
+entity "Producto" as Producto {
+  *idProducto : int
+  --
+  nombre : string
+  descripcion : string
+  precio : decimal
+  stock : int
+}
+
+entity "Pedido" as Pedido {
+  *idPedido : int
+  --
+  fecha : date
+  total : decimal
+  idCliente : int
+}
+
+entity "DetallePedido" as DetallePedido {
+  *idDetalle : int
+  --
+  idPedido : int
+  idProducto : int
+  cantidad : int
+  subtotal : decimal
+}
+
+entity "Ingrediente" as Ingrediente {
+  *idIngrediente : int
+  --
+  nombre : string
+  descripcion : string
+}
+
+entity "Composicion" as Composicion {
+  *idProducto : int
+  *idIngrediente : int
+}
+
+Cliente ||--o{ Pedido : realiza
+Pedido ||--o{ DetallePedido : contiene
+Producto ||--o{ DetallePedido : incluye
+Producto ||--o{ Composicion : formado por
+Ingrediente ||--o{ Composicion : pertenece a
+@enduml
