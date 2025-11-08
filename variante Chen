@@ -1,0 +1,46 @@
+@startuml
+title Diagrama E-R (Variante Chen) - Honeymoon Jabones Naturales
+
+entity Cliente {
+  *idCliente
+  nombre
+  correo
+  telefono
+  direccion
+}
+
+entity Pedido {
+  *idPedido
+  fecha
+  total
+}
+
+entity Producto {
+  *idProducto
+  nombre
+  descripcion
+  precio
+  stock
+}
+
+entity DetallePedido {
+  *idDetalle
+  cantidad
+  subtotal
+}
+
+entity Ingrediente {
+  *idIngrediente
+  nombre
+  descripcion
+}
+
+entity Composicion
+
+' Relaciones principales
+Cliente "1" -- "N" Pedido : realiza
+Pedido "1" -- "N" DetallePedido : contiene
+DetallePedido "N" -- "1" Producto : incluye
+Producto "N" -- "N" Ingrediente : compuesto por
+
+@enduml
